@@ -8,7 +8,8 @@ const mongooseOptions: ConnectionOptions = {
 };
 
 (async () => {
-    await mongoose.connect(MONGODB_URI, mongooseOptions, () =>
-        console.log('DB connected')
-    );
+    await mongoose
+        .connect(MONGODB_URI, mongooseOptions)
+        .then(() => console.log('DB Connected'))
+        .catch(err => console.error(err));
 })();
