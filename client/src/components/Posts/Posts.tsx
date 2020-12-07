@@ -9,8 +9,6 @@ const Posts = () => {
     const posts = useSelector((state: RootStateOrAny) => state.posts);
     const classes = useStyles();
 
-    console.log(posts);
-
     return (
         <>
             <h1>Posts component</h1>

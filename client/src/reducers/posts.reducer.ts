@@ -7,7 +7,7 @@ const postsReducer = (state = initialState, action: any) => {
         case ACTION_TYPES.FETCH_POSTS:
             return action.payload;
         case ACTION_TYPES.CREATE_POST:
-            return action.payload;
+            return [...state, action.payload];
         default:
             return state;
     }

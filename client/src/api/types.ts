@@ -3,8 +3,8 @@ export interface IPost {
     title: string;
     message: string;
     creator: string;
-    tags?: [string];
+    tags?: string[];
     selectedFile: string;
-    likesCount: number;
-    createdAt: Date;
+    likesCount?: number;
+    createdAt?: Date;
 }
