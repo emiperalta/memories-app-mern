@@ -15,7 +15,7 @@ const initialState = {
     selectedFile: '',
 };
 
-const Form = () => {
+const Form: React.FC = () => {
     const [postData, setPostData] = useState(initialState);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Form = () => {
 
         dispatch(createPost(postData));
 
-        console.log(postData);
+        setPostData({ ...initialState, tags: [] });
     };
 
     const onChangeHandler = (e: InputChange) => {
@@ -53,7 +53,7 @@ const Form = () => {
         });
     };
 
-    const clearHander = () => {};
+    const clearHander = () => setPostData({ ...initialState, tags: [] });
 
     return (
         <Paper className={classes.paper}>
@@ -106,7 +106,6 @@ const Form = () => {
                 <Button
                     className={classes.buttonSubmit}
                     variant='contained'
-                    color='primary'
                     size='large'
                     fullWidth
                     type='submit'
@@ -114,8 +113,8 @@ const Form = () => {
                     Submit
                 </Button>
                 <Button
+                    className={classes.buttonClear}
                     variant='contained'
-                    color='secondary'
                     size='small'
                     fullWidth
                     onClick={clearHander}

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import './App.css';
 
 import img from './images/img.png';
 import Posts from './components/Posts/Posts';

@@ -4,6 +4,8 @@ export default makeStyles(() => ({
     media: {
         height: 0,
         paddingTop: '56%',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundBlendMode: 'darken',
     },
     border: {
         border: 'solid',
@@ -38,6 +40,9 @@ export default makeStyles(() => ({
         display: 'flex',
         justifyContent: 'space-between',
         margin: 20,
+    },
+    title: {
+        padding: '0 16px',
     },
     cardActions: {
         padding: '0 16px 8px 16px',
