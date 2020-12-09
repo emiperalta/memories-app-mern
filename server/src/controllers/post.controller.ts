@@ -31,6 +31,9 @@ export const updatePost: RequestHandler = async (req, res) => {
         const { title, message, creator, tags, selectedFile } = req.body;
         const { id } = req.params;
 
+        if (!mongoose.Types.ObjectId.isValid(id))
+            return res.status(404).json({ error: 'Post not found.' });
+
         const update = new Post({
             title: title,
             message: message,
@@ -46,6 +49,21 @@ export const updatePost: RequestHandler = async (req, res) => {
         });
 
         res.status(200).json(updatedPost);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
+export const deletePost: RequestHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id))
+            return res.status(404).json({ error: 'Post not found.' });
+
+        await Post.findByIdAndDelete(id);
+
+        res.status(204).json();
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
