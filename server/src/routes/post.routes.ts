@@ -10,6 +10,8 @@ router.post('/posts', postController.createPost);
 
 router.patch('/posts/:id', postController.updatePost);
 
+router.patch('/posts/:id/likePost', postController.likePost);
+
 router.delete('/posts/:id', postController.deletePost);
 
 export default router;

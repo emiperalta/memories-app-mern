@@ -54,6 +54,29 @@ export const updatePost: RequestHandler = async (req, res) => {
     }
 };
 
+export const likePost: RequestHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await Post.findById(id);
+        let updatedPost = null;
+
+        if (post)
+            updatedPost = await Post.findByIdAndUpdate(
+                id,
+                {
+                    likesCount: post.likesCount + 1,
+                },
+                { new: true }
+            );
+        else res.json({ error: 'Post not found' });
+
+        res.status(200).json(updatedPost);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
 export const deletePost: RequestHandler = async (req, res) => {
     try {
         const { id } = req.params;
