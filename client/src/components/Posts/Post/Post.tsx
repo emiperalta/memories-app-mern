@@ -18,6 +18,8 @@ import { IPost } from '../../../api/types';
 const Post: React.FC<IPost> = (props: IPost) => {
     const classes = useStyles();
 
+    const editHandler = () => props.setCurrentId!(props._id!);
+
     return (
         <Card className={classes.card}>
             <CardMedia
@@ -35,9 +37,7 @@ const Post: React.FC<IPost> = (props: IPost) => {
                 <Button
                     style={{ color: 'white' }}
                     size='small'
-                    onClick={() => {
-                        props.setCurrentId!(props._id!);
-                    }}
+                    onClick={editHandler}
                 >
                     <EditIcon fontSize='default' />
                 </Button>
@@ -47,8 +47,11 @@ const Post: React.FC<IPost> = (props: IPost) => {
                     {props.tags?.map(tag => `#${tag} `)}
                 </Typography>
             </div>
+            <Typography className={classes.title} variant='h6' gutterBottom>
+                {props.title}
+            </Typography>
             <CardContent>
-                <Typography className={classes.title} variant='h5' gutterBottom>
+                <Typography variant='h6' gutterBottom>
                     {props.message}
                 </Typography>
             </CardContent>
@@ -59,8 +62,7 @@ const Post: React.FC<IPost> = (props: IPost) => {
                     onClick={() => {}}
                 >
                     <ThumbUpAltIcon fontSize='small' />
-                    Like
-                    {props.likesCount}
+                    Like {props.likesCount}
                 </Button>
                 <Button
                     size='small'

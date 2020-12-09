@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
 import { InputChange, InputSubmit } from './types';
-import { createPost } from '../../actions/posts.actions';
-import { PostProps } from '../../api/types';
+import { createPost, updatePost } from '../../actions/posts.actions';
+import { IPost, PostProps } from '../../api/types';
 
 const initialState = {
     title: '',
@@ -17,16 +17,32 @@ const initialState = {
 };
 
 const Form: React.FC<PostProps> = (props: PostProps) => {
-    const [postData, setPostData] = useState(initialState);
+    // get post if there is a currentId (currentId !== null)
+    const post = useSelector((state: RootStateOrAny) =>
+        props.currentId
+            ? state.posts.find((post: IPost) => post._id === props.currentId)
+            : null
+    );
+
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const [postData, setPostData] = useState(initialState);
+
+    // hook that fills the form fields if there is a post and on each change of the constant 'post'
+    useEffect(() => {
+        if (post) setPostData(post);
+    }, [post]);
 
     const submitHandler = (e: InputSubmit) => {
         e.preventDefault();
 
-        dispatch(createPost(postData));
+        props.currentId
+            ? dispatch(updatePost(props.currentId, postData))
+            : dispatch(createPost(postData));
 
         setPostData({ ...initialState, tags: [] });
+        props.setCurrentId!('');
     };
 
     const onChangeHandler = (e: InputChange) => {
@@ -54,7 +70,10 @@ const Form: React.FC<PostProps> = (props: PostProps) => {
         });
     };
 
-    const clearHander = () => setPostData({ ...initialState, tags: [] });
+    const clearHander = () => {
+        setPostData({ ...initialState, tags: [], selectedFile: '' });
+        props.setCurrentId!('');
+    };
 
     return (
         <Paper className={classes.paper}>
@@ -64,7 +83,9 @@ const Form: React.FC<PostProps> = (props: PostProps) => {
                 className={`${classes.root} ${classes.form}`}
                 onSubmit={submitHandler}
             >
-                <Typography variant='h6'>Creating a memory</Typography>
+                <Typography variant='h6'>
+                    {props.currentId ? 'Editing' : 'Creating'} a memory
+                </Typography>
                 <TextField
                     name='creator'
                     label='Creator'

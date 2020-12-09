@@ -1,4 +1,5 @@
 import { ACTION_TYPES } from '../actions/posts.actions';
+import { IPost } from '../api/types';
 
 const initialState = []!;
 
@@ -8,6 +9,10 @@ const postsReducer = (state = initialState, action: any) => {
             return action.payload;
         case ACTION_TYPES.CREATE_POST:
             return [...state, action.payload];
+        case ACTION_TYPES.UPDATE_POST:
+            return state.map((post: IPost) =>
+                post._id === action.payload._id ? action.payload : post
+            );
         default:
             return state;
     }
