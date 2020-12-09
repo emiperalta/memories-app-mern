@@ -10,6 +10,7 @@ const postsReducer = (state = initialState, action: any) => {
         case ACTION_TYPES.CREATE_POST:
             return [...state, action.payload];
         case ACTION_TYPES.UPDATE_POST:
+        case ACTION_TYPES.LIKE_POST:
             return state.map((post: IPost) =>
                 post._id === action.payload._id ? action.payload : post
             );

@@ -5,6 +5,17 @@ export default makeStyles(theme => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
         },
+        '& .MuiOutlinedInput-root': {
+            '&:hover fieldset': {
+                borderColor: '#8fccc3',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#8fccc3',
+            },
+        },
+        '& .MuiFormLabel-root.Mui-focused': {
+            color: '#8fccc3',
+        },
     },
     paper: {
         padding: theme.spacing(2),

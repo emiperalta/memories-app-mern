@@ -21,7 +21,7 @@ const Posts: React.FC<PostProps> = (props: PostProps) => {
             spacing={3}
         >
             {posts.map((post: IPost) => (
-                <Grid key={post._id} item xs={12} sm={6}>
+                <Grid key={post._id} item xs={12} sm={6} md={6}>
                     <Post {...post} setCurrentId={props.setCurrentId} />
                 </Grid>
             ))}

@@ -7,6 +7,7 @@ export const ACTION_TYPES = {
     FETCH_POSTS: 'FETCH_POSTS',
     CREATE_POST: 'CREATE_POST',
     UPDATE_POST: 'UPDATE_POST',
+    LIKE_POST: 'LIKE_POST',
     DELETE_POST: 'DELETE_POST',
 };
 
@@ -45,6 +46,21 @@ export const updatePost = (
 
         dispatch({
             type: ACTION_TYPES.UPDATE_POST,
+            payload: res.data,
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const likePost = (postId: string | number) => async (
+    dispatch: Dispatch
+) => {
+    try {
+        const res = await api.likePost(postId);
+
+        dispatch({
+            type: ACTION_TYPES.LIKE_POST,
             payload: res.data,
         });
     } catch (err) {

@@ -20,7 +20,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import useStyles from './styles';
 import { IPost } from '../../../api/types';
-import { deletePost } from '../../../actions/posts.actions';
+import { deletePost, likePost } from '../../../actions/posts.actions';
 
 const Post: React.FC<IPost> = (props: IPost) => {
     const [open, setOpen] = useState(false);
@@ -30,6 +30,7 @@ const Post: React.FC<IPost> = (props: IPost) => {
 
     const editHandler = () => props.setCurrentId!(props._id!);
 
+    const likeHandler = () => dispatch(likePost(props._id!));
     const deleteHandler = () => dispatch(deletePost(props._id!));
 
     const openHandler = () => setOpen(true);
@@ -62,11 +63,11 @@ const Post: React.FC<IPost> = (props: IPost) => {
                     {props.tags?.map(tag => `#${tag} `)}
                 </Typography>
             </div>
-            <Typography className={classes.title} variant='h6' gutterBottom>
+            <Typography className={classes.title} variant='h6'>
                 {props.title}
             </Typography>
             <CardContent>
-                <Typography variant='subtitle1' gutterBottom>
+                <Typography variant='subtitle1' color='textSecondary'>
                     {props.message}
                 </Typography>
             </CardContent>
@@ -74,17 +75,17 @@ const Post: React.FC<IPost> = (props: IPost) => {
                 <Button
                     size='small'
                     className={classes.cardButtons}
-                    onClick={() => {}}
+                    onClick={likeHandler}
                 >
-                    <ThumbUpAltIcon fontSize='small' />
-                    Like {props.likesCount}
+                    <ThumbUpAltIcon />
+                    &nbsp;Like &nbsp;{props.likesCount}
                 </Button>
                 <Button
                     size='small'
                     className={classes.cardButtons}
                     onClick={openHandler}
                 >
-                    <DeleteIcon fontSize='small' />
+                    <DeleteIcon />
                     Delete
                 </Button>
                 <Dialog
