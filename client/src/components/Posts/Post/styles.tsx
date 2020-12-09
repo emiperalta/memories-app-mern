@@ -49,4 +49,10 @@ export default makeStyles(() => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    cardButtons: {
+        color: '#8fccc3',
+        '&:hover': {
+            color: '#6dcabc',
+        },
+    },
 }));

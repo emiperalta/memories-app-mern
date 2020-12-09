@@ -4,9 +4,9 @@ import { Grid, CircularProgress } from '@material-ui/core';
 
 import Post from './Post/Post';
 import useStyles from './styles';
-import { IPost } from '../../api/types';
+import { IPost, PostProps } from '../../api/types';
 
-const Posts: React.FC = () => {
+const Posts: React.FC<PostProps> = (props: PostProps) => {
     // use the posts reducer
     const posts = useSelector((state: RootStateOrAny) => state.posts);
     const classes = useStyles();
@@ -21,8 +21,8 @@ const Posts: React.FC = () => {
             spacing={3}
         >
             {posts.map((post: IPost) => (
-                <Grid key={post.id} item xs={12} sm={6}>
-                    <Post {...post} />
+                <Grid key={post._id} item xs={12} sm={6}>
+                    <Post {...post} setCurrentId={props.setCurrentId} />
                 </Grid>
             ))}
         </Grid>

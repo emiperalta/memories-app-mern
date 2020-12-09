@@ -6,6 +6,7 @@ import FileBase from 'react-file-base64';
 import useStyles from './styles';
 import { InputChange, InputSubmit } from './types';
 import { createPost } from '../../actions/posts.actions';
+import { PostProps } from '../../api/types';
 
 const initialState = {
     title: '',
@@ -15,7 +16,7 @@ const initialState = {
     selectedFile: '',
 };
 
-const Form: React.FC = () => {
+const Form: React.FC<PostProps> = (props: PostProps) => {
     const [postData, setPostData] = useState(initialState);
     const classes = useStyles();
     const dispatch = useDispatch();

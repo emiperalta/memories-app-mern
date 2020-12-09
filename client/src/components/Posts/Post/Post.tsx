@@ -10,12 +10,12 @@ import {
 } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import EditIcon from '@material-ui/icons/Edit';
 
 import useStyles from './styles';
 import { IPost } from '../../../api/types';
 
-const Post: React.FC<IPost> = props => {
+const Post: React.FC<IPost> = (props: IPost) => {
     const classes = useStyles();
 
     return (
@@ -35,9 +35,11 @@ const Post: React.FC<IPost> = props => {
                 <Button
                     style={{ color: 'white' }}
                     size='small'
-                    onClick={() => {}}
+                    onClick={() => {
+                        props.setCurrentId!(props._id!);
+                    }}
                 >
-                    <MoreHorizIcon fontSize='default' />
+                    <EditIcon fontSize='default' />
                 </Button>
             </div>
             <div className={classes.details}>
@@ -51,12 +53,20 @@ const Post: React.FC<IPost> = props => {
                 </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size='small' color='primary' onClick={() => {}}>
+                <Button
+                    size='small'
+                    className={classes.cardButtons}
+                    onClick={() => {}}
+                >
                     <ThumbUpAltIcon fontSize='small' />
                     Like
                     {props.likesCount}
                 </Button>
-                <Button size='small' color='primary' onClick={() => {}}>
+                <Button
+                    size='small'
+                    className={classes.cardButtons}
+                    onClick={() => {}}
+                >
                     <DeleteIcon fontSize='small' />
                     Delete
                 </Button>
