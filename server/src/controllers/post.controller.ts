@@ -28,16 +28,22 @@ export const createPost: RequestHandler = async (req, res) => {
 
 export const updatePost: RequestHandler = async (req, res) => {
     try {
-        await postInputValidation(req.body);
+        const { title, message, creator, tags, selectedFile } = req.body;
+        const { id } = req.params;
 
-        if (!mongoose.Types.ObjectId.isValid(req.params.id))
-            return res.status(404).json({ message: 'No post with that id' });
+        const update = new Post({
+            title: title,
+            message: message,
+            creator: creator,
+            tags: tags,
+            selectedFile: selectedFile,
+            createdAt: new Date(), // to show on the frontend the time when the update was made
+            _id: id,
+        });
 
-        const updatedPost = await Post.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
+        const updatedPost = await Post.findByIdAndUpdate(id, update, {
+            new: true,
+        });
 
         res.status(200).json(updatedPost);
     } catch (err) {
