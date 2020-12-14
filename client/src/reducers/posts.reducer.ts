@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from '../actions/posts.actions';
+import { ACTION_TYPES } from '../actions/actionTypes';
 import { IPost } from '../api/types';
 
 const initialState = []!;

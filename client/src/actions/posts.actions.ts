@@ -2,14 +2,7 @@ import * as api from '../api';
 import { Dispatch } from 'redux';
 
 import { IPost } from '../api/types';
-
-export const ACTION_TYPES = {
-    FETCH_POSTS: 'FETCH_POSTS',
-    CREATE_POST: 'CREATE_POST',
-    UPDATE_POST: 'UPDATE_POST',
-    LIKE_POST: 'LIKE_POST',
-    DELETE_POST: 'DELETE_POST',
-};
+import { ACTION_TYPES } from './actionTypes';
 
 export const getPosts = () => async (dispatch: Dispatch) => {
     try {

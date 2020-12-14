@@ -42,7 +42,7 @@ const Form: React.FC<PostProps> = (props: PostProps) => {
             : dispatch(createPost(postData));
 
         setPostData({ ...initialState, tags: [] });
-        props.setCurrentId!('');
+        props.setCurrentId!(0);
     };
 
     const onChangeHandler = (e: InputChange) => {
@@ -72,7 +72,7 @@ const Form: React.FC<PostProps> = (props: PostProps) => {
 
     const clearHander = () => {
         setPostData({ ...initialState, tags: [], selectedFile: '' });
-        props.setCurrentId!('');
+        props.setCurrentId!(0);
     };
 
     return (
